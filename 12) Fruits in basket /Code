@@ -1,0 +1,24 @@
+Qlink: https://leetcode.com/problems/fruit-into-baskets/
+
+class Solution {
+public:
+    int totalFruit(vector<int>& fruits) {
+        int tail=0;int head;int ans=0;unordered_map<int,int> um;
+
+        for(head=0;head<fruits.size();head++){
+
+            um[fruits[head]]++;
+
+            while(um.size()>2){
+                um[fruits[tail]]--;
+                if(um[fruits[tail]]==0) um.erase(fruits[tail]);
+
+                tail++;
+            }
+
+            ans=max(ans,head-tail+1);
+        }
+
+        return ans;
+    }
+};
