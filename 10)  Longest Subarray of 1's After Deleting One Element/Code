@@ -1,0 +1,39 @@
+Qlink : https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/
+
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) {
+        int tail=0;int head;int ans=0;int ctZero=0;
+
+        for(head=0;head<nums.size();head++){
+
+            if(nums[head]==0) ctZero++;
+            
+
+            while(ctZero>1){
+
+                //ans update
+                // je zero te akhon darie achi ota k baki rakhte hoche so --> -1
+                // ager zero ta ke delete korchi so length of 1's subarray --> -1
+                //so length of 1's subarray= (actual length -2)
+                ans=max(ans, (head-tail+1)-2 );
+
+                //pechon theke bomi koro jotokhon ctZero==1 na hoi
+                if(nums[tail]==0) ctZero--;
+
+                tail++;
+            }
+
+
+        }
+
+        // ekhane currently kono 0 r opor darie nei tao -1 korlam 
+        // karon head++ already hoa jawar por head<n a fail koreche...so head ek ghor egie
+
+        //and ager zero ta le delete korchi so tar jonyo -1 korlam
+        
+          ans=max(ans, (head-tail+1) -2);
+
+          return ans;
+    }
+};
