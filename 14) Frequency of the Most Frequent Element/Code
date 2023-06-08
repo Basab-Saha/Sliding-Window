@@ -1,0 +1,34 @@
+Qlink :  https://leetcode.com/problems/frequency-of-the-most-frequent-element/
+
+class Solution {
+public:
+    int maxFrequency(vector<int>& nums, int k) {
+        long long tail=0;long long head;long long ans=0;long long sum=0;
+
+        sort(nums.begin(),nums.end());
+
+        for(head=0;head<nums.size();head++){
+            sum=sum+nums[head];
+
+            //currently my window[tail..head]=sum
+            // but i want my window[tail..head]= total window length all with head elem
+            //so window[tail..head]=(head-tail+1)*nums[head]
+            //old sum value of window =sum
+            //new sum value of window=(head-tail+1)*nums[head]
+            //increments needed-->(head-tail+1)*nums[head]  -  sum
+            //now max possible incemrnets operations is k so if req increments>k then 
+            // condition fail(while loop enter for tail shirnk )
+
+            while( ((head-tail+1)*nums[head]) - sum > k ){
+
+                sum=sum-nums[tail];
+
+                tail++;
+            }
+
+            ans=max(ans,head-tail+1);
+        }
+
+        return ans;
+    }
+};
