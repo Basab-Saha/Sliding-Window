@@ -1,0 +1,25 @@
+Question link : https://leetcode.com/problems/longest-repeating-character-replacement/
+
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        int tail=0;int ans=0;int cnt[26]={};
+
+        for(int head=0;head<s.size();head++){
+            //opeartion
+            cnt[s[head]-'A']++;
+
+            //condition fail (optimal req flips > maxFlipLimit)
+            while(head-tail+1 - *max_element(cnt,cnt+26) > k){
+                //pechon theke bomi (tail update)
+                cnt[s[tail]-'A']--;
+                //shrink
+                tail++;
+            }
+
+            ans=max(ans,head-tail+1);
+        }
+
+        return ans;
+    }
+};
