@@ -1,0 +1,23 @@
+Qlink:  https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/
+
+
+class Solution {
+public:
+    long long getDescentPeriods(vector<int>& prices) {
+        
+        long long tail=0;long long head;long long ans=0;
+
+        for(head=1;head<prices.size();head++){
+
+            if(prices[head]==prices[head-1]-1){
+                ans=ans+(head-tail+1);
+            }
+            else{
+                tail=head;
+                ans=ans+1; 
+            }
+        }
+
+        return ans+1;
+    }
+};
