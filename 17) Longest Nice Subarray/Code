@@ -1,0 +1,38 @@
+Qlink:  https://leetcode.com/problems/longest-nice-subarray/
+
+class Solution {
+public:
+    int longestNiceSubarray(vector<int>& nums) {
+        int tail=0;int head;int ans=0;int prevOR=0;
+
+        for(head=0;head<nums.size();head++){
+
+
+            if(nums[head] & prevOR==0){
+                prevOR=prevOR | nums[head];
+
+              
+            }
+
+        else{
+
+
+            while((nums[head] & prevOR) > 0){
+                prevOR=prevOR^nums[tail];
+                tail++;
+            }
+
+            //now ok
+
+          prevOR=prevOR | nums[head];
+            
+
+        }
+    ans=max(ans,head-tail+1);
+
+    }
+
+    return ans;
+
+    }
+};
