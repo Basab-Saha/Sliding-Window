@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        
+        int tail=0;
+        int ans=0;
+        unordered_map<char,int> um;
+
+        for(int head=0;head<s.size();head++){
+            um[s[head]]++;
+
+            while(um[s[head]]>1){
+                //bomi koro pechon theke
+                um[s[tail]]--;
+                //pechon shrink koro
+                tail++;
+            }
+
+            ans=max(ans,head-tail+1);
+        }
+
+        return ans;
+    }
+};
