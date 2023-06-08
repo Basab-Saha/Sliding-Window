@@ -1,0 +1,33 @@
+Qlink:  https://leetcode.com/problems/number-of-zero-filled-subarrays/
+
+
+class Solution {
+public:
+    long long zeroFilledSubarray(vector<int>& nums) {
+        long long tail=0;long long head;long long ans=0;
+
+        vector<long long> pre;
+         long long presum=0;
+        for(long long i=0;i<nums.size();i++){
+            presum+=nums[i];
+            pre.push_back(presum);
+        } 
+
+
+
+        for(head=0;head<nums.size();head++){
+           if(nums[head]==0){
+               
+               while( tail!=0? pre[head]-pre[tail-1] !=0 : pre[head]!=0 )  {
+                   tail++;
+               } 
+
+               ans=ans+(head-tail+1);
+        }
+
+        
+    }
+
+    return ans;
+    }
+};
