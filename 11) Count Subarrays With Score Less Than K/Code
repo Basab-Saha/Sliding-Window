@@ -1,0 +1,23 @@
+Qlink:  https://leetcode.com/problems/count-subarrays-with-score-less-than-k/
+
+class Solution {
+public:
+    long long countSubarrays(vector<int>& nums, long long k) {
+        long long tail=0;long long head;long long ans=0;long long score=0;
+        long long sum=0;
+
+        for( head=0;head<nums.size();head++){
+            sum=sum+nums[head];
+            score=sum*(head-tail+1);
+
+            while(score>=k){
+                sum=sum-nums[tail];
+                tail++;
+                score=sum*(head-tail+1);
+            }
+            ans=ans+(head-tail+1);
+        }
+
+        return ans;
+    }
+};
